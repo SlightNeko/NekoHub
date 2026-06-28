@@ -53,13 +53,14 @@ fun SettingPermissionPage() {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val context = LocalContext.current
 
+    // State for refresh
+    var refreshKey by remember { mutableStateOf(0) }
+    fun refresh() { refreshKey++ }
+
     // Permission request launcher
     val permissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { refresh() }
-    
-    var refreshKey by remember { mutableStateOf(0) }
-    fun refresh() { refreshKey++ }
 
     Scaffold(
         topBar = {
