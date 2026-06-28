@@ -100,6 +100,30 @@ private fun AssistantLocalToolContent(
     )
     PermissionManager(permissionState = calendarPermissionState)
 
+    val locationPermissionState = rememberPermissionState(
+        permissions = setOf(
+            PermissionInfo(
+                permission = Manifest.permission.ACCESS_FINE_LOCATION,
+                displayName = { Text(stringResource(R.string.permission_location)) },
+                usage = { Text(stringResource(R.string.permission_location_desc)) },
+                required = true
+            ),
+        )
+    )
+    PermissionManager(permissionState = locationPermissionState)
+
+    val smsPermissionState = rememberPermissionState(
+        permissions = setOf(
+            PermissionInfo(
+                permission = Manifest.permission.READ_SMS,
+                displayName = { Text(stringResource(R.string.permission_sms)) },
+                usage = { Text(stringResource(R.string.permission_sms_desc)) },
+                required = true
+            ),
+        )
+    )
+    PermissionManager(permissionState = smsPermissionState)
+
     fun toggleLocalTool(option: LocalToolOption, enabled: Boolean) {
         if (enabled && option == LocalToolOption.ScreenTime && !context.hasUsageStatsPermission()) {
             toaster.show(message = permissionRequiredText, type = ToastType.Warning)
@@ -107,6 +131,14 @@ private fun AssistantLocalToolContent(
         }
         if (enabled && option == LocalToolOption.Calendar && !calendarPermissionState.allPermissionsGranted) {
             calendarPermissionState.requestPermissions()
+            return
+        }
+        if (enabled && option == LocalToolOption.Location && !locationPermissionState.allPermissionsGranted) {
+            locationPermissionState.requestPermissions()
+            return
+        }
+        if (enabled && option == LocalToolOption.Sms && !smsPermissionState.allPermissionsGranted) {
+            smsPermissionState.requestPermissions()
             return
         }
         val newLocalTools = if (enabled) {
@@ -221,6 +253,188 @@ private fun AssistantLocalToolContent(
                     Switch(
                         checked = assistant.localTools.contains(LocalToolOption.Calendar),
                         onCheckedChange = { toggleLocalTool(LocalToolOption.Calendar, it) }
+                    )
+                }
+            )
+            item(
+                headlineContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_location_title))
+                },
+                supportingContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_location_desc))
+                },
+                trailingContent = {
+                    Switch(
+                        checked = assistant.localTools.contains(LocalToolOption.Location),
+                        onCheckedChange = { toggleLocalTool(LocalToolOption.Location, it) }
+                    )
+                }
+            )
+            item(
+                headlineContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_notification_title))
+                },
+                supportingContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_notification_desc))
+                },
+                trailingContent = {
+                    Switch(
+                        checked = assistant.localTools.contains(LocalToolOption.Notification),
+                        onCheckedChange = { toggleLocalTool(LocalToolOption.Notification, it) }
+                    )
+                }
+            )
+            item(
+                headlineContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_app_usage_trajectory_title))
+                },
+                supportingContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_app_usage_trajectory_desc))
+                },
+                trailingContent = {
+                    Switch(
+                        checked = assistant.localTools.contains(LocalToolOption.AppUsageTrajectory),
+                        onCheckedChange = { toggleLocalTool(LocalToolOption.AppUsageTrajectory, it) }
+                    )
+                }
+            )
+            item(
+                headlineContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_nearby_poi_title))
+                },
+                supportingContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_nearby_poi_desc))
+                },
+                trailingContent = {
+                    Switch(
+                        checked = assistant.localTools.contains(LocalToolOption.NearbyPoi),
+                        onCheckedChange = { toggleLocalTool(LocalToolOption.NearbyPoi, it) }
+                    )
+                }
+            )
+            item(
+                headlineContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_battery_title))
+                },
+                supportingContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_battery_desc))
+                },
+                trailingContent = {
+                    Switch(
+                        checked = assistant.localTools.contains(LocalToolOption.Battery),
+                        onCheckedChange = { toggleLocalTool(LocalToolOption.Battery, it) }
+                    )
+                }
+            )
+            item(
+                headlineContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_sms_title))
+                },
+                supportingContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_sms_desc))
+                },
+                trailingContent = {
+                    Switch(
+                        checked = assistant.localTools.contains(LocalToolOption.Sms),
+                        onCheckedChange = { toggleLocalTool(LocalToolOption.Sms, it) }
+                    )
+                }
+            )
+            item(
+                headlineContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_music_control_title))
+                },
+                supportingContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_music_control_desc))
+                },
+                trailingContent = {
+                    Switch(
+                        checked = assistant.localTools.contains(LocalToolOption.MusicControl),
+                        onCheckedChange = { toggleLocalTool(LocalToolOption.MusicControl, it) }
+                    )
+                }
+            )
+            item(
+                headlineContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_camera_title))
+                },
+                supportingContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_camera_desc))
+                },
+                trailingContent = {
+                    Switch(
+                        checked = assistant.localTools.contains(LocalToolOption.Camera),
+                        onCheckedChange = { toggleLocalTool(LocalToolOption.Camera, it) }
+                    )
+                }
+            )
+            item(
+                headlineContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_alarm_title))
+                },
+                supportingContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_alarm_desc))
+                },
+                trailingContent = {
+                    Switch(
+                        checked = assistant.localTools.contains(LocalToolOption.Alarm),
+                        onCheckedChange = { toggleLocalTool(LocalToolOption.Alarm, it) }
+                    )
+                }
+            )
+            item(
+                headlineContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_screen_events_title))
+                },
+                supportingContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_screen_events_desc))
+                },
+                trailingContent = {
+                    Switch(
+                        checked = assistant.localTools.contains(LocalToolOption.ScreenEvents),
+                        onCheckedChange = { toggleLocalTool(LocalToolOption.ScreenEvents, it) }
+                    )
+                }
+            )
+            item(
+                headlineContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_proactive_message_title))
+                },
+                supportingContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_proactive_message_desc))
+                },
+                trailingContent = {
+                    Switch(
+                        checked = assistant.localTools.contains(LocalToolOption.ProactiveMessaging),
+                        onCheckedChange = { toggleLocalTool(LocalToolOption.ProactiveMessaging, it) }
+                    )
+                }
+            )
+            item(
+                headlineContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_health_data_title))
+                },
+                supportingContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_health_data_desc))
+                },
+                trailingContent = {
+                    Switch(
+                        checked = assistant.localTools.contains(LocalToolOption.HealthData),
+                        onCheckedChange = { toggleLocalTool(LocalToolOption.HealthData, it) }
+                    )
+                }
+            )
+            item(
+                headlineContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_supabase_title))
+                },
+                supportingContent = {
+                    Text(stringResource(R.string.assistant_page_local_tools_supabase_desc))
+                },
+                trailingContent = {
+                    Switch(
+                        checked = assistant.localTools.contains(LocalToolOption.Supabase),
+                        onCheckedChange = { toggleLocalTool(LocalToolOption.Supabase, it) }
                     )
                 }
             )
