@@ -85,6 +85,11 @@ private fun AssistantLocalToolContent(
     val permissionRequiredText =
         stringResource(R.string.assistant_page_local_tools_screen_time_permission_required)
 
+    val alarmPermissionRequiredText =
+        stringResource(R.string.assistant_page_local_tools_alarm_permission_required)
+    val notificationPermissionRequiredText =
+        stringResource(R.string.assistant_page_local_tools_notification_permission_required)
+
     val calendarPermissionState = rememberPermissionState(
         permissions = setOf(
             PermissionInfo(
@@ -165,7 +170,7 @@ private fun AssistantLocalToolContent(
                 val alarmManager = context.getSystemService(android.app.AlarmManager::class.java)
                 if (!alarmManager.canScheduleExactAlarms()) {
                     toaster.show(
-                        message = stringResource(R.string.assistant_page_local_tools_alarm_permission_required),
+                        message = alarmPermissionRequiredText,
                         type = ToastType.Warning
                     )
                     context.startActivity(Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM))
@@ -175,7 +180,7 @@ private fun AssistantLocalToolContent(
         }
         if (enabled && option == LocalToolOption.Notification) {
             toaster.show(
-                message = stringResource(R.string.assistant_page_local_tools_notification_permission_required),
+                message = notificationPermissionRequiredText,
                 type = ToastType.Info
             )
             context.startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
