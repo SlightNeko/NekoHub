@@ -40,6 +40,29 @@ import me.rerere.rikkahub.ui.components.ui.CardGroup
 import me.rerere.rikkahub.ui.theme.CustomColors
 import me.rerere.rikkahub.utils.plus
 
+val ALL_LOCAL_TOOLS = listOf(
+    LocalToolOption.JavascriptEngine to R.string.assistant_page_local_tools_javascript_engine_title,
+    LocalToolOption.TimeInfo to R.string.assistant_page_local_tools_time_info_title,
+    LocalToolOption.Clipboard to R.string.assistant_page_local_tools_clipboard_title,
+    LocalToolOption.Tts to R.string.assistant_page_local_tools_tts_title,
+    LocalToolOption.AskUser to R.string.assistant_page_local_tools_ask_user_title,
+    LocalToolOption.ScreenTime to R.string.assistant_page_local_tools_screen_time_title,
+    LocalToolOption.Calendar to R.string.assistant_page_local_tools_calendar_title,
+    LocalToolOption.Location to R.string.assistant_page_local_tools_location_title,
+    LocalToolOption.Notification to R.string.assistant_page_local_tools_notification_title,
+    LocalToolOption.AppUsageTrajectory to R.string.assistant_page_local_tools_app_usage_trajectory_title,
+    LocalToolOption.NearbyPoi to R.string.assistant_page_local_tools_nearby_poi_title,
+    LocalToolOption.Battery to R.string.assistant_page_local_tools_battery_title,
+    LocalToolOption.Sms to R.string.assistant_page_local_tools_sms_title,
+    LocalToolOption.MusicControl to R.string.assistant_page_local_tools_music_control_title,
+    LocalToolOption.Camera to R.string.assistant_page_local_tools_camera_title,
+    LocalToolOption.Alarm to R.string.assistant_page_local_tools_alarm_title,
+    LocalToolOption.ScreenEvents to R.string.assistant_page_local_tools_screen_events_title,
+    LocalToolOption.ProactiveMessaging to R.string.assistant_page_local_tools_proactive_message_title,
+    LocalToolOption.HealthData to R.string.assistant_page_local_tools_health_data_title,
+    LocalToolOption.Supabase to R.string.assistant_page_local_tools_supabase_title,
+)
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingLocalToolsPage() {
@@ -77,9 +100,9 @@ fun SettingLocalToolsPage() {
                     modifier = Modifier.padding(horizontal = 8.dp),
                     title = { Text(stringResource(R.string.setting_local_tools_all_tools)) }
                 ) {
-                    LocalToolOption.values().forEach { option ->
+                    ALL_LOCAL_TOOLS.forEach { (option, titleRes) ->
                         val icon = toolIcon(option)
-                        val title = toolTitle(option, context)
+                        val title = context.getString(titleRes)
                         val desc = toolDesc(option, context)
                         item(
                             leadingContent = { Icon(icon, null) },
@@ -114,32 +137,6 @@ private fun toolIcon(option: LocalToolOption) = when (option) {
     LocalToolOption.ProactiveMessaging -> HugeIcons.Message01
     LocalToolOption.HealthData -> HugeIcons.Favourite
     LocalToolOption.Supabase -> HugeIcons.MarketAnalysis
-}
-
-private fun toolTitle(option: LocalToolOption, context: Context): String {
-    val id = when (option) {
-        LocalToolOption.JavascriptEngine -> R.string.assistant_page_local_tools_javascript_engine_title
-        LocalToolOption.TimeInfo -> R.string.assistant_page_local_tools_time_info_title
-        LocalToolOption.Clipboard -> R.string.assistant_page_local_tools_clipboard_title
-        LocalToolOption.Tts -> R.string.assistant_page_local_tools_tts_title
-        LocalToolOption.AskUser -> R.string.assistant_page_local_tools_ask_user_title
-        LocalToolOption.ScreenTime -> R.string.assistant_page_local_tools_screen_time_title
-        LocalToolOption.Calendar -> R.string.assistant_page_local_tools_calendar_title
-        LocalToolOption.Location -> R.string.assistant_page_local_tools_location_title
-        LocalToolOption.Notification -> R.string.assistant_page_local_tools_notification_title
-        LocalToolOption.AppUsageTrajectory -> R.string.assistant_page_local_tools_app_usage_trajectory_title
-        LocalToolOption.NearbyPoi -> R.string.assistant_page_local_tools_nearby_poi_title
-        LocalToolOption.Battery -> R.string.assistant_page_local_tools_battery_title
-        LocalToolOption.Sms -> R.string.assistant_page_local_tools_sms_title
-        LocalToolOption.MusicControl -> R.string.assistant_page_local_tools_music_control_title
-        LocalToolOption.Camera -> R.string.assistant_page_local_tools_camera_title
-        LocalToolOption.Alarm -> R.string.assistant_page_local_tools_alarm_title
-        LocalToolOption.ScreenEvents -> R.string.assistant_page_local_tools_screen_events_title
-        LocalToolOption.ProactiveMessaging -> R.string.assistant_page_local_tools_proactive_message_title
-        LocalToolOption.HealthData -> R.string.assistant_page_local_tools_health_data_title
-        LocalToolOption.Supabase -> R.string.assistant_page_local_tools_supabase_title
-    }
-    return context.getString(id)
 }
 
 private fun toolDesc(option: LocalToolOption, context: Context): String {
