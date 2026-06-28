@@ -21,11 +21,12 @@ jobs:
 
       - name: Create google-services.json
         run: |
-          echo '{
+          cat > app/google-services.json << 'EOF'
+          {
             "project_info": {
               "project_number": "000000000000",
-              "project_id": "rikkahub-ci-build",
-              "storage_bucket": "rikkahub-ci-build.appspot.com"
+              "project_id": "rikkahub-ci",
+              "storage_bucket": "rikkahub-ci.appspot.com"
             },
             "client": [
               {
@@ -36,20 +37,28 @@ jobs:
                   }
                 },
                 "oauth_client": [],
-                "api_key": [
-                  {
-                    "current_key": "AIzaSyDummyCIBuildKey000000000000"
-                  }
-                ],
+                "api_key": [{ "current_key": "AIzaSyDummyCIBuildKey000000000000" }],
                 "services": {
-                  "appinvite_service": {
-                    "other_platform_oauth_client": []
+                  "appinvite_service": { "other_platform_oauth_client": [] }
+                }
+              },
+              {
+                "client_info": {
+                  "mobilesdk_app_id": "1:000000000000:android:abc123def457",
+                  "android_client_info": {
+                    "package_name": "me.rerere.rikkahub.debug"
                   }
+                },
+                "oauth_client": [],
+                "api_key": [{ "current_key": "AIzaSyDummyCIBuildKey000000000000" }],
+                "services": {
+                  "appinvite_service": { "other_platform_oauth_client": [] }
                 }
               }
             ],
             "configuration_version": "1"
-          }' > app/google-services.json
+          }
+          EOF
 
       - name: Build Debug APK
         run: ./gradlew assembleDebug --no-daemon --stacktrace
