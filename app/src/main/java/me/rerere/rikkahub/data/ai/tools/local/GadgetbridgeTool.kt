@@ -2,6 +2,7 @@ package me.rerere.rikkahub.data.ai.tools.local
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
@@ -90,13 +91,13 @@ internal fun buildGadgetbridgeTool(context: Context): Tool = Tool(
                 put("timezone", ZoneId.systemDefault().id)
 
                 if (dataType == "steps" || dataType == "all") {
-                    put("steps", querySteps(db, days))
+                    put("steps", Json.parseToJsonElement(querySteps(db, days).toString()))
                 }
                 if (dataType == "heartrate" || dataType == "all") {
-                    put("heart_rate", queryHeartRate(db, days))
+                    put("heart_rate", Json.parseToJsonElement(queryHeartRate(db, days).toString()))
                 }
                 if (dataType == "sleep" || dataType == "all") {
-                    put("sleep", querySleep(db, days))
+                    put("sleep", Json.parseToJsonElement(querySleep(db, days).toString()))
                 }
             }
             listOf(UIMessagePart.Text(payload.toString()))
