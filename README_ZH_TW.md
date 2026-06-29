@@ -4,7 +4,7 @@
 
 Fork 自 [RikkaHub](https://github.com/re-ovo/rikkahub) — 擴展了系統級 AI 工具。
 
-[English](README_EN.md) | 繁體中文 | [简体中文](README.md)
+[English](README_EN.md) | [简体中文](README.md)
 </div>
 
 <div align="center">

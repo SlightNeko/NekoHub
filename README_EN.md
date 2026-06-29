@@ -4,7 +4,7 @@
 
 Forked from [RikkaHub](https://github.com/re-ovo/rikkahub) — extended with system-level AI tools.
 
-[简体中文](README.md) | [繁體中文](README_ZH_TW.md) | English
+[简体中文](README.md) | [繁體中文](README_ZH_TW.md)
 </div>
 
 <div align="center">
