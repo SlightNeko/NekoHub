@@ -188,8 +188,9 @@ internal fun buildProactiveMessageTool(context: Context): Tool = Tool(
 
         when (action) {
             "enable" -> {
-                val min = params["min_minutes"]?.jsonPrimitive?.contentOrNull?.toIntOrNull() ?: 60
-                val max = params["max_minutes"]?.jsonPrimitive?.contentOrNull?.toIntOrNull() ?: 180
+                val currentConfig = ProactiveMessageScheduler.getConfig(context)
+                val min = params["min_minutes"]?.jsonPrimitive?.contentOrNull?.toIntOrNull() ?: currentConfig.first
+                val max = params["max_minutes"]?.jsonPrimitive?.contentOrNull?.toIntOrNull() ?: currentConfig.second
                 if (min < 5) {
                     return@Tool listOf(UIMessagePart.Text(buildJsonObject {
                         put("error", "INTERVAL_TOO_SMALL")

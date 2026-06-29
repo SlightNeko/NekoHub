@@ -123,6 +123,7 @@ import me.rerere.rikkahub.ui.pages.setting.SettingSpeechPage
 import me.rerere.rikkahub.ui.pages.setting.SettingWebPage
 import me.rerere.rikkahub.ui.pages.setting.SettingPermissionPage
 import me.rerere.rikkahub.ui.pages.setting.SettingLocalToolsPage
+import me.rerere.rikkahub.ui.pages.setting.SettingProactivePage
 import me.rerere.rikkahub.ui.pages.setting.SettingIntegrationPage
 import me.rerere.rikkahub.ui.pages.share.handler.ShareHandlerPage
 import me.rerere.rikkahub.ui.pages.stats.StatsPage
@@ -431,6 +432,10 @@ class RouteActivity : ComponentActivity() {
                                 SettingLocalToolsPage()
                             }
 
+                            entry<Screen.SettingProactive> {
+                                SettingProactivePage()
+                            }
+
                             entry<Screen.SettingIntegration> {
                                 SettingIntegrationPage()
                             }
@@ -661,6 +666,9 @@ sealed interface Screen : NavKey {
 
     @Serializable
     data object SettingLocalTools : Screen
+
+    @Serializable
+    data object SettingProactive : Screen
 
     @Serializable
     data object SettingIntegration : Screen

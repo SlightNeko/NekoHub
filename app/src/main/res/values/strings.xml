@@ -1348,5 +1348,11 @@
   <string name="about_page_fork_name">NekoHub (SlightNeko Fork)</string>
   <string name="about_page_fork_desc">A fork with extended local tools and system features</string>
   <string name="about_page_fork_github">Fork source code</string>
+  <string name="setting_proactive_title">Proactive Messaging</string>
+  <string name="setting_proactive_min_interval">Minimum interval (minutes)</string>
+  <string name="setting_proactive_max_interval">Maximum interval (minutes)</string>
+  <string name="setting_proactive_enabled">Enable proactive messages</string>
+  <string name="setting_proactive_min_desc">Shortest time between messages</string>
+  <string name="setting_proactive_max_desc">Longest time between messages</string>
 </resources>
 

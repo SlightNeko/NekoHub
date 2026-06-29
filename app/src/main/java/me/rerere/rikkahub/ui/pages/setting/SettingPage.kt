@@ -215,6 +215,12 @@ fun SettingPage(vm: SettingVM = koinViewModel()) {
                         headlineContent = { Text(stringResource(R.string.setting_page_local_tools)) },
                     )
                     item(
+                        onClick = { navController.navigate(Screen.SettingProactive) },
+                        leadingContent = { Icon(HugeIcons.Megaphone01, null) },
+                        supportingContent = { Text(stringResource(R.string.setting_proactive_min_desc)) },
+                        headlineContent = { Text(stringResource(R.string.setting_proactive_title)) },
+                    )
+                    item(
                         onClick = { navController.navigate(Screen.SettingIntegration) },
                         leadingContent = { Icon(HugeIcons.Link01, null) },
                         supportingContent = { Text(stringResource(R.string.setting_integration_desc)) },
