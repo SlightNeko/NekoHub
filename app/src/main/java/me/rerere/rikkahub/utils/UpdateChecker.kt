@@ -91,14 +91,16 @@ data class UpdateDownload(
 @Serializable
 data class UpdateInfo(
     @SerialName("tag_name")
-    val version: String,
+    val _version: String,
     @SerialName("published_at")
     val publishedAt: String,
     @SerialName("body")
     val changelog: String,
     @SerialName("assets")
     val downloads: List<UpdateDownload>
-)
+) {
+    val version: String get() = _version.removePrefix("v")
+}
 
 /**
  * 版本号值类，封装版本号字符串并提供比较功能
