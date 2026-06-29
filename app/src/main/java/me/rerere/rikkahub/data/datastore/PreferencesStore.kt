@@ -196,8 +196,8 @@ class SettingsStore(
                 autoCompressEnabled = preferences[AUTO_COMPRESS_ENABLED] == true,
                 autoCompressTriggerTurns = preferences[AUTO_COMPRESS_TRIGGER_TURNS] ?: 20,
                 autoCompressTriggerTokens = preferences[AUTO_COMPRESS_TRIGGER_TOKENS] ?: 8000,
-                autoCompressTargetTokens = preferences[AUTO_COMPRESS_TARGET_TOKENS] ?: 3000,
-                autoCompressKeepRecent = preferences[AUTO_COMPRESS_KEEP_RECENT] ?: 5,
+                autoCompressTargetTokens = preferences[AUTO_COMPRESS_TARGET_TOKENS] ?: 2000,
+                autoCompressKeepRecent = preferences[AUTO_COMPRESS_KEEP_RECENT] ?: 32,
                 autoCompressAdditionalPrompt = preferences[AUTO_COMPRESS_ADDITIONAL_PROMPT] ?: "",
                 assistantId = preferences[SELECT_ASSISTANT]?.let { Uuid.parse(it) }
                     ?: DEFAULT_ASSISTANT_ID,
