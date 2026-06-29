@@ -303,8 +303,7 @@ private fun ChatPageContent(
     LaunchedEffect(Unit) {
         vm.autoCompressDoneFlow.collect {
             autoCompressToaster.show(
-                message = autoCompressToastMsg,
-                duration = kotlin.time.Duration.Companion.milliseconds(2000)
+                message = autoCompressToastMsg
             )
         }
     }
