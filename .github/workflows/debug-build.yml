@@ -1,4 +1,4 @@
-name: Debug APK Build
+name: Release APK Build
 
 on:
   push:
@@ -81,8 +81,8 @@ jobs:
           }
           EOF
 
-      - name: Build Debug APK
-        run: ./gradlew assembleDebug --no-daemon --stacktrace
+      - name: Build Release APK
+        run: ./gradlew assembleRelease --no-daemon --stacktrace
         env:
           NEKOHUB_KEYSTORE: ${{ github.workspace }}/neko.keystore
           NEKOHUB_STORE_PASSWORD: 'A%p5uLwSu3j#fBw'
@@ -92,14 +92,14 @@ jobs:
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: NekoHub-debug
-          path: app/build/outputs/apk/debug/*.apk
+          name: NekoHub-release
+          path: app/build/outputs/apk/release/*.apk
           retention-days: 7
 
       - name: Find APK
         id: apk
         run: |
-          APK=$(ls app/build/outputs/apk/debug/*.apk | head -1)
+          APK=$(ls app/build/outputs/apk/release/*.apk | head -1)
           echo "path=$APK" >> $GITHUB_OUTPUT
           echo "name=$(basename $APK)" >> $GITHUB_OUTPUT
 
@@ -107,7 +107,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: ${{ steps.apk.outputs.path }}
-          name: "NekoHub Debug Build"
+          name: "NekoHub Release"
           tag_name: "build-${{ github.run_number }}"
           prerelease: true
           generate_release_notes: true

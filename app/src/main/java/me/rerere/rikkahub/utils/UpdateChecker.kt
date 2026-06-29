@@ -18,7 +18,7 @@ import me.rerere.rikkahub.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
-private const val API_URL = "https://api.github.com/repos/SlightNeko/rikkahub/releases/latest"
+private const val API_URL = "https://api.github.com/repos/SlightNeko/rikkahub/releases?per_page=1"
 
 class UpdateChecker(private val client: OkHttpClient) {
     private val json = Json { ignoreUnknownKeys = true }
@@ -39,7 +39,8 @@ class UpdateChecker(private val client: OkHttpClient) {
                             .build()
                     ).await()
                     if (response.isSuccessful) {
-                        json.decodeFromString<UpdateInfo>(response.body.string())
+                        val releases = json.decodeFromString<List<UpdateInfo>>(response.body.string())
+                        releases.firstOrNull() ?: throw Exception("No releases found")
                     } else {
                         throw Exception("Failed to fetch update info")
                     }

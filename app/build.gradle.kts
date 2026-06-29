@@ -80,7 +80,7 @@ android {
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release")
+            signingConfig = signingConfigs.getByName("nekohub")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
