@@ -28,7 +28,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dokar.sonner.ToastType
 import me.rerere.rikkahub.R
 import me.rerere.rikkahub.data.ai.tools.local.LocalToolOption
-import me.rerere.rikkahub.data.ai.tools.local.ProactiveMessageScheduler
+
 import me.rerere.rikkahub.data.model.Assistant
 import me.rerere.rikkahub.ui.components.nav.BackButton
 import me.rerere.rikkahub.ui.components.ui.CardGroup
@@ -193,17 +193,6 @@ private fun AssistantLocalToolContent(
                 context.startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
                 return
             }
-        }
-        if (option == LocalToolOption.ProactiveMessaging) {
-            if (enabled) {
-                ProactiveMessageScheduler.enable(context, 60, 180)
-            } else {
-                ProactiveMessageScheduler.disable(context)
-            }
-        }
-        if (option == LocalToolOption.Supabase) {
-            val prefs = context.getSharedPreferences("supabase_config", Context.MODE_PRIVATE)
-            prefs.edit().putBoolean("enabled", enabled).apply()
         }
         val newLocalTools = if (enabled) {
             assistant.localTools + option
