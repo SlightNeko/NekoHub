@@ -232,6 +232,14 @@ class NekoHubApp : Application() {
             .setShowBadge(false)
             .build()
         notificationManager.createNotificationChannel(webServerChannel)
+
+        val dailySummaryChannel = NotificationChannelCompat
+            .Builder("daily_summary", NotificationManagerCompat.IMPORTANCE_LOW)
+            .setName("定时任务")
+            .setVibrationEnabled(false)
+            .setShowBadge(false)
+            .build()
+        notificationManager.createNotificationChannel(dailySummaryChannel)
     }
 
     override fun onTerminate() {

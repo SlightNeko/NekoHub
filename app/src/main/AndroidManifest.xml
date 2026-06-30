@@ -186,12 +186,31 @@
       android:foregroundServiceType="dataSync"
       android:exported="false" />
 
+    <service
+      android:name=".data.service.DeviceEventTrackingService"
+      android:foregroundServiceType="dataSync"
+      android:exported="false" />
+
     <receiver
       android:name=".data.service.SupabaseSyncReceiver"
       android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.BOOT_COMPLETED" />
         <action android:name="me.rerere.rikkahub.action.SUPABASE_SYNC" />
+      </intent-filter>
+    </receiver>
+
+    <service
+      android:name=".data.service.DailySummaryTriggerService"
+      android:foregroundServiceType="dataSync"
+      android:exported="false" />
+
+    <receiver
+      android:name=".data.service.DailySummaryReceiver"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <action android:name="me.rerere.rikkahub.DAILY_CRON" />
       </intent-filter>
     </receiver>
   </application>
